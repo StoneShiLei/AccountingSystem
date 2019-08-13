@@ -148,12 +148,16 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Configuration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\DateDetailController.cs" />
     <Compile Include="Controllers\DetailController.cs" />
     <Compile Include="Controllers\TagController.cs" />
+    <Compile Include="Controllers\TagDetailController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\ApiResultModel.cs" />
+    <Compile Include="Models\DateDetailViewModel.cs" />
+    <Compile Include="Models\TagDetailViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

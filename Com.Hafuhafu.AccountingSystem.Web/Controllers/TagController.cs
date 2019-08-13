@@ -1,9 +1,12 @@
-﻿using System;
+﻿using Com.Hafuhafu.AccountingSystem.Application;
+using Com.Hafuhafu.AccountingSystem.Domain.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+
 
 namespace Com.Hafuhafu.AccountingSystem.Web.Controllers
 {
@@ -12,31 +15,86 @@ namespace Com.Hafuhafu.AccountingSystem.Web.Controllers
     /// </summary>
     public class TagController : ApiController
     {
-        // GET api/<controller>
-        public IEnumerable<string> Get()
+        public TagService TagService { get; }
+        public TagController()
         {
-            return new string[] { "value1", "value2" };
+            TagService = new TagService();
+        }
+        
+        /// <summary>
+        /// 获取所有标签
+        /// </summary>
+        /// <returns></returns>
+        public IList<Tag> Get()
+        {
+            return TagService.GetAll();
         }
 
-        // GET api/<controller>/5
-        public string Get(int id)
+        /// <summary>
+        /// 根据id获取标签
+        /// </summary>
+        /// <param name="id">标签id</param>
+        /// <returns></returns>
+        public Tag Get(string id)
         {
-            return "value";
+            return TagService.Get(a => a.ID == new Guid(id));
         }
 
-        // POST api/<controller>
-        public void Post([FromBody]string value)
+        /// <summary>
+        /// 创建标签
+        /// </summary>
+        /// <param name="tag">（ignore：ID,AddDateTime）</param>
+        public Tag Post(Tag tag)
         {
+            var newTag = new Tag()
+            {
+                TagInfo = tag.TagInfo
+            };
+
+            bool result = TagService.Add(newTag);
+
+            if (!result)
+            {
+                throw new Exception("数据创建失败");
+            }
+            else
+            {
+                return newTag;
+            }
         }
 
-        // PUT api/<controller>/5
-        public void Put(int id, [FromBody]string value)
+        /// <summary>
+        /// 修改标签
+        /// </summary>
+        /// <param name="tag">（ignore：ID,AddDateTime）</param>
+        public bool Put(Tag tag)
         {
+            bool result = TagService.Update(a => new Tag() { TagInfo = tag.TagInfo }, a => a.ID == tag.ID);
+            if (!result)
+            {
+                throw new Exception("修改账户失败");
+            }
+            else
+            {
+                return true;
+            }
         }
 
-        // DELETE api/<controller>/5
-        public void Delete(int id)
+        /// <summary>
+        /// 根据id删除标签
+        /// </summary>
+        /// <param name="id">标签id</param>
+        public bool Delete(string id)
         {
+            bool result = TagService.Remove(id);
+            if (!result)
+            {
+                throw new Exception("删除账户失败");
+            }
+            else
+            {
+                return true;
+            }
         }
     }
 }

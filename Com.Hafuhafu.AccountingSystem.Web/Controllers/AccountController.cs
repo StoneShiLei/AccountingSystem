@@ -14,10 +14,10 @@ namespace Com.Hafuhafu.AccountingSystem.Web.Controllers
     /// </summary>
     public class AccountController : ApiController
     {
-        public AccountService accountService { get; } 
+        public AccountService AccountService { get; } 
         public AccountController()
         {
-            accountService = new AccountService();
+            AccountService = new AccountService();
         }
 
 
@@ -27,7 +27,7 @@ namespace Com.Hafuhafu.AccountingSystem.Web.Controllers
         /// <returns></returns>
         public IList<Account> Get()
         {
-            return accountService.GetAll();
+            return AccountService.GetAll();
         }
 
        /// <summary>
@@ -37,53 +37,63 @@ namespace Com.Hafuhafu.AccountingSystem.Web.Controllers
        /// <returns></returns>
         public Account Get(string id)
         {
-            return accountService.Get(a => a.ID == new Guid(id));
+            return AccountService.Get(a => a.ID == new Guid(id));
         }
 
         /// <summary>
         /// 创建账户
         /// </summary>
-        /// <param name="account">账户实体</param>
-        public void Post(Account account)
+        /// <param name="account">（ignore：ID,AddDateTime）</param>
+        public Account Post(Account account)
         {
             var newAccount = new Account()
             {
                 AccountName = account.AccountName,
                 Balance = account.Balance
             };
-            bool result = accountService.Add(newAccount);
+            bool result = AccountService.Add(newAccount);
 
-            if(!result)
+            if (!result)
             {
                 throw new Exception("数据创建失败");
+            }
+            else
+            {
+                return newAccount;
             }
         }
 
         /// <summary>
         /// 修改账户
         /// </summary>
-        /// <param name="account">账户实体</param>
-        [NoPackageResult]
-        public void Put(Account account)
+        /// <param name="account">（ignore：ID,AddDateTime）</param>
+        public bool Put(Account account)
         {
-            bool result = accountService.Update(a => new Account() { Balance = account.Balance, AccountName = account.AccountName }, a => a.ID == account.ID);
+            bool result = AccountService.Update(a => new Account() { Balance = account.Balance, AccountName = account.AccountName }, a => a.ID == account.ID);
             if (!result)
             {
                 throw new Exception("修改账户失败");
+            }
+            else
+            {
+                return true;
             }
         }
 
         /// <summary>
         /// 根据id删除账户
         /// </summary>
-        /// <param name="id"></param>
-        [NoPackageResult]
-        public void Delete(string id)
+        /// <param name="id">账户id</param>
+        public bool Delete(string id)
         {
-            bool result = accountService.Remove(id);
+            bool result = AccountService.Remove(id);
             if (!result)
             {
                 throw new Exception("删除账户失败");
+            }
+            else
+            {
+                return true;
             }
         }
     }
