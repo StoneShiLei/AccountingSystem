@@ -5,6 +5,9 @@ using System.Web;
 
 namespace Com.Hafuhafu.AccountingSystem.Web.Models
 {
+    /// <summary>
+    /// 标签明细视图模型
+    /// </summary>
     public class TagDetailViewModel
     {
         /// <summary>

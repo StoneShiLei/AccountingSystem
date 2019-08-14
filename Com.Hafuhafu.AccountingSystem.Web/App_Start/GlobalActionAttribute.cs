@@ -66,8 +66,8 @@ namespace Com.Hafuhafu.AccountingSystem.Web
 
         private static HttpResponseMessage ToJson(Object obj)
         {
-            String str;
-            if (obj is String || obj is Char)//如果是字符串或字符直接返回
+            string str;
+            if (obj is string || obj is char)//如果是字符串或字符直接返回
             {
                 str = obj.ToString();
             }

@@ -26,14 +26,14 @@ namespace Com.Hafuhafu.AccountingSystem.Web.Controllers
         /// <param name="end"></param>
         /// <returns></returns>
         [HttpGet]
-        public List<TagDetailViewModel> GetTagDetail(DateTime start, DateTime end)
+        public List<TagDetailViewModel> GetTagDetails(DateTime start, DateTime end)
         {
             var details = DetailService.GetAll(d => d.Date >= start.Date && d.Date <= end.Date).ToList();
 
             //将支出类型的明细涉及金额变为负数
             details = details.Select(d =>
             {
-                d.Amount = d.Type == Type.支出 ? Math.Abs(d.Amount) : d.Amount;
+                d.Amount = d.Type == Type.支出 ? -d.Amount : d.Amount;
                 return d;
             }).ToList();
 

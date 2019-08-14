@@ -18,8 +18,8 @@ namespace Com.Hafuhafu.AccountingSystem.Web
             config.EnableCors(new EnableCorsAttribute("*", "*", "*"));
 
             //注册过滤器
-            //config.Filters.Add(new GlobalExceptionHandleAttribute());
             config.Filters.Add(new GlobalActionAttribute());
+            config.Filters.Add(new ApiAuthorizeAttribute());
 
 
             // Web API 路由

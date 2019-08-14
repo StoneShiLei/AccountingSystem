@@ -26,7 +26,7 @@ namespace Com.Hafuhafu.AccountingSystem.Web.Controllers
         /// <param name="end">结束日期（含）e.g 2019-08-13</param>
         /// <returns></returns>
         [HttpGet]
-        public DateDetailViewModel Getaaa(DateTime start, DateTime end)
+        public DateDetailViewModel GetDateDetails(DateTime start, DateTime end)
         {
             var result = new DateDetailViewModel();
             var details = DetailService.GetAll(d => d.Date >= start.Date && d.Date <= end.Date, d => d.Date,

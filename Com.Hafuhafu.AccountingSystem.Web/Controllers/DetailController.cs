@@ -59,6 +59,9 @@ namespace Com.Hafuhafu.AccountingSystem.Web.Controllers
             var account = AccountService.Get(a => a.ID == detail.AccountID);
             if (account == null) throw new Exception("AccountID 不存在");
 
+            //将金额改为正数
+            if (detail.Amount < 0) detail.Amount = Math.Abs(detail.Amount);
+
             var newDetail = new Detail()
             {
                 AccountID = account.ID,

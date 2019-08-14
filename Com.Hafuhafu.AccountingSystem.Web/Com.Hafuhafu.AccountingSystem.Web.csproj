@@ -138,6 +138,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\ApiAuthorizeAttribute.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\GlobalActionAttribute.cs" />
@@ -150,6 +151,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\DateDetailController.cs" />
     <Compile Include="Controllers\DetailController.cs" />
+    <Compile Include="Controllers\NoteDetailController.cs" />
     <Compile Include="Controllers\TagController.cs" />
     <Compile Include="Controllers\TagDetailController.cs" />
     <Compile Include="Global.asax.cs">
@@ -157,6 +159,7 @@
     </Compile>
     <Compile Include="Models\ApiResultModel.cs" />
     <Compile Include="Models\DateDetailViewModel.cs" />
+    <Compile Include="Models\NoteDetailViewModel.cs" />
     <Compile Include="Models\TagDetailViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
